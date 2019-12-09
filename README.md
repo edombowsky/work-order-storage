@@ -4,13 +4,14 @@ The Work Order Storage service is responsible for persisting into PostgreSQL, en
 
 ## Install a PostgreSQL docker container. 
 
+See detailed instructions [here](https://hub.docker.com/_/postgres).
+
 - Creates a database named `postgres` with username `postgres` and password `docker`. 
 - Data will be persisted in `$HOME/docker/volumes/postgres`
 
 ```bash
-docker pull postgres
 mkdir -p $HOME/docker/volumes/postgres
-docker run --rm --name pg -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres
+docker run --rm --name pg -e POSTGRES_PASSWORD=docker -e POSTGRES_USER=postgres -e POSTGRES_DB=postgres -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres
 ```
 
 - Run the migration
