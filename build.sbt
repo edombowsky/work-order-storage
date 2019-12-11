@@ -65,16 +65,21 @@ lazy val root = (project in file("."))
   .settings(
     libraryDependencies += "com.github.tminglei" %% "slick-pg" % "0.18.1",
     libraryDependencies += "com.github.tminglei" %% "slick-pg_play-json" % "0.18.1",
+    libraryDependencies += "com.github.tminglei" %% "slick-pg_circe-json" % "0.18.1",
+    libraryDependencies += "io.circe" %% "circe-core" % "0.12.3",
+    libraryDependencies += "io.circe" %% "circe-generic" % "0.12.3",
+    libraryDependencies += "io.circe" %% "circe-parser" % "0.12.3",
     //libraryDependencies += "org.slf4j" % "slf4j-nop" % "1.6.4",
     libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.3",
-    libraryDependencies += "org.postgresql" % "postgresql" % "42.2.8",
+    libraryDependencies += "org.postgresql" % "postgresql" % "42.2.9",
     libraryDependencies += "com.byteslounge" %% "slick-repo" % "1.5.3",
     libraryDependencies += "com.typesafe.slick" %% "slick-codegen" % "3.3.2",
     libraryDependencies += "com.typesafe.slick" %% "slick-hikaricp" % "3.3.2",
-    libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.8",
-    libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.8" % Test,
+    libraryDependencies += "org.scalactic" %% "scalactic" % "3.1.0",
+    libraryDependencies += "org.scalatest" %% "scalatest" % "3.1.0" % Test,
     libraryDependencies += "io.jvm.uuid" %% "scala-uuid" % "0.3.1",
-    libraryDependencies += "org.flywaydb" % "flyway-core" % "6.0.8",
+    libraryDependencies += "org.flywaydb" % "flyway-core" % "6.1.1",
+    libraryDependencies += "com.github.nscala-time" %% "nscala-time" % "2.22.0",
   )
   //.enablePlugin(FlywayPlugin)
 
