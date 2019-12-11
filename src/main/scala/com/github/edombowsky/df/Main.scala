@@ -71,13 +71,16 @@ object Main {
     println(s"WorkOrder to be saved:: $wo")
     val workOrderRepository = new WorkOrderRepository(ExtendedPostgresProfile)
     val workOrder = AppSettings.db.run(workOrderRepository.save(wo))
-    //val workOrder: workOrderRepository.driver.api.DBIO[WorkOrder] = workOrderRepository.save(wo)
-    //
-    //workOrder map { result =>
-    //  val id = result.id.getOrElse("NULL")
-    //  val desc = result.description
-    //  println(s"Inserted $id::$desc")
-    //}
+
+/*
+    val workOrder: workOrderRepository.driver.api.DBIO[WorkOrder] = workOrderRepository.save(wo)
+
+    workOrder map { result =>
+      val id = result.id.getOrElse("NULL")
+      val desc = result.description
+      println(s"Inserted $id::$desc")
+    }
+*/
 
     //val w: Future[WorkOrder] = workOrderRepository.db.run(workOrderRepository.save())
     workOrder.onComplete {
