@@ -5,12 +5,10 @@ import java.sql.Timestamp
 import com.byteslounge.slickrepo.meta.Keyed
 import com.byteslounge.slickrepo.repository.Repository
 import com.byteslounge.slickrepo.scalaversion.JdbcProfile
-import play.api.libs.json.JsValue
-
-import com.github.edombowsky.df.model.WorkOrder
 import slick.ast.BaseTypedType
 import slick.collection.heterogeneous.HNil
 
+import com.github.edombowsky.df.model.WorkOrder
 import com.github.edombowsky.df.utils.DB
 
 class WorkOrderRepository(override val driver: JdbcProfile)
@@ -54,7 +52,7 @@ class WorkOrderRepository(override val driver: JdbcProfile)
     def completionComments = column[Option[String]]("completion_comments")
     def location = column[Option[String]]("location")
     def assetPosition = column[Option[String]]("asset_position")
-    def solutionAttributes = column[Option[String]]("solution_attributes")
+    def solutionAttributes = column[String]("solution_attributes")
     def customAttributes = column[Option[String]]("custom_attributes")
     def responsibleOrg = column[Option[String]]("responsible_org")
     def account = column[Option[String]]("account")
