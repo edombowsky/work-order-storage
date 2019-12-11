@@ -1,5 +1,8 @@
 package com.github.edombowsky.df
 
+
+import com.github.edombowsky.df.utils.DatabaseExecutor._
+
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.util.Failure
@@ -69,8 +72,9 @@ object Main {
       activity = None
     )
     println(s"WorkOrder to be saved:: $wo")
+
     val workOrderRepository = new WorkOrderRepository(ExtendedPostgresProfile)
-    val workOrder = AppSettings.db.run(workOrderRepository.save(wo))
+    val workOrder = workOrderRepository.save(wo)
 
 /*
     val workOrder: workOrderRepository.driver.api.DBIO[WorkOrder] = workOrderRepository.save(wo)
@@ -90,6 +94,15 @@ object Main {
       case Failure(exception) =>
         exception.printStackTrace()
         //println(s"Encountered an exception::\n${exception.printStackTrace()}")
+    }
+    Thread.sleep(2000)
+
+
+    workOrderRepository.count().onComplete {
+      case Success(value) =>
+        println(s"Number of work_orders = $value")
+      case Failure(exception) =>
+        exception.printStackTrace()
     }
     Thread.sleep(2000)
   }

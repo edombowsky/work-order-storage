@@ -13,7 +13,7 @@ import com.github.edombowsky.df.model.WorkOrder
 import com.github.edombowsky.df.utils.DB
 
 class WorkOrderRepository(override val driver: JdbcProfile)
-  extends Repository[WorkOrder, String](driver) with DB {
+  extends Repository[WorkOrder, String](driver) {
 
   import driver.api._
   val pkType = implicitly[BaseTypedType[String]]
