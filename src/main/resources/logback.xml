@@ -3,6 +3,7 @@
     <!--<logger name="slick.jdbc.StatementInvoker.result" level="DEBUG" /> &lt;!&ndash; for the result, table view of your result &ndash;&gt;-->
     <!--<logger name="slick.basic.BasicBackend.action" level="DEBUG" /> &lt;!&ndash; to see the generated sql &ndash;&gt;-->
     <logger name="slick.jdbc" level="DEBUG" /> <!-- for everything. Slick logs many many things -->
+    <!-- https://scala-slick.org/doc/3.3.2/config.html -->
     <!--<logger name="slick.basic.BasicBackend.action"          level="${log.action:-info}" />-->
     <!--<logger name="slick.basic.BasicBackend.stream"          level="${log.stream:-info}" />-->
     <!--<logger name="slick.compiler"                           level="${log.qcomp:-info}" />-->
