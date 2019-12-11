@@ -1,21 +1,18 @@
 package com.github.edombowsky.df
 
-import java.util.concurrent.Executors
-
-import scala.concurrent.ExecutionContext
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.util.Failure
 import scala.util.Success
 
 import io.jvm.uuid._
-import play.api.libs.json.Json
-import slick.jdbc.PostgresProfile
+import io.circe._
+import io.circe.parser._
 
-//import com.github.edombowsky.df.config.MigrationConfig
+import com.github.edombowsky.df.config.AppSettings
 import com.github.edombowsky.df.model.WorkOrder
 import com.github.edombowsky.df.repository.WorkOrderRepository
-//import com.github.edombowsky.df.utils.DatabaseExecutor._
+//import com.github.edombowsky.df.repository.WorkOrderRepository
 import com.github.edombowsky.df.utils.ExtendedPostgresProfile
 
 //object Main extends MigrationConfig {
@@ -63,7 +60,7 @@ object Main {
       completionComments = None,
       location = None,
       assetPosition = None,
-      solutionAttributes = None, //Some(Json.parse("{}")),
+      solutionAttributes = "{}", //parse(""" { "a":101, "b":"aaa", "c":[3,4,5,9] } """).getOrElse(Json.Null),
       customAttributes = None,
       responsibleOrg = None,
       account = None,
@@ -73,19 +70,24 @@ object Main {
     )
     println(s"WorkOrder to be saved:: $wo")
     val workOrderRepository = new WorkOrderRepository(ExtendedPostgresProfile)
-    val workOrder: workOrderRepository.driver.api.DBIO[WorkOrder] = workOrderRepository.save(wo)
-
+    val workOrder = AppSettings.db.run(workOrderRepository.save(wo))
+    //val workOrder: workOrderRepository.driver.api.DBIO[WorkOrder] = workOrderRepository.save(wo)
+    //
     //workOrder map { result =>
-    //  println(s"${result.description}")
+    //  val id = result.id.getOrElse("NULL")
+    //  val desc = result.description
+    //  println(s"Inserted $id::$desc")
     //}
-    //workOrder.onComplete {
-    //  case Success(value) =>
-    //    println("Id of WorkOrder Added : " + value.id.getOrElse("0000"))
-    //    println("SUCCESS")
-    //  case Failure(exception) =>
-    //    exception.printStackTrace()
-    //    //println(s"Encountered an exception::\n${exception.printStackTrace()}")
-    //}
-    //Thread.sleep(2000)
+
+    //val w: Future[WorkOrder] = workOrderRepository.db.run(workOrderRepository.save())
+    workOrder.onComplete {
+      case Success(value) =>
+        println("Id of WorkOrder Added : " + value.id.getOrElse("0000"))
+        println("SUCCESS")
+      case Failure(exception) =>
+        exception.printStackTrace()
+        //println(s"Encountered an exception::\n${exception.printStackTrace()}")
+    }
+    Thread.sleep(2000)
   }
 }

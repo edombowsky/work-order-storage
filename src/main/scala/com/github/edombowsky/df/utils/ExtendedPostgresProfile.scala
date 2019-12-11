@@ -1,33 +1,54 @@
 package com.github.edombowsky.df.utils
 
 import com.github.tminglei.slickpg._
-import com.github.tminglei.slickpg.PgArraySupport
-import com.github.tminglei.slickpg.PgSearchSupport
-import com.github.tminglei.slickpg.PgNetSupport
-import com.github.tminglei.slickpg.PgPlayJsonSupport
-import com.github.tminglei.slickpg.PgLTreeSupport
-import com.github.tminglei.slickpg.PgRangeSupport
-import com.github.tminglei.slickpg.PgDateSupport
-import com.github.tminglei.slickpg.PgHStoreSupport
-import play.api.libs.json.JsValue
-import play.api.libs.json.Json
-import com.github.tminglei.slickpg.utils.SimpleArrayUtils
-import slick.ast.TypedType
-import slick.basic.Capability
-import slick.jdbc.JdbcCapabilities
+import com.github.tminglei.slickpg.PgCirceJsonSupport
+import slick.jdbc.PostgresProfile
 
-trait ExtendedPostgresProfile extends ExPostgresProfile with PgPlayJsonSupport {
-  def pgjson = "jsonb"
+trait MyPostgresProfile extends PostgresProfile
+  with PgCirceJsonSupport
+  with array.PgArrayJdbcTypes {
+  override val pgjson = "jsonb"
 
-  override protected def computeCapabilities: Set[Capability] =
-    super.computeCapabilities + JdbcCapabilities.insertOrUpdate
+  override val api: API = new API {}
 
-  override val api = PostgresJsonSupportAPI
+  val plainAPI = new API with CirceJsonPlainImplicits
 
-  object PostgresJsonSupportAPI extends API with JsonImplicits
+  ///
+  trait API extends super.API with JsonImplicits {
+    implicit val strListTypeMapper = new SimpleArrayJdbcType[String]("text").to(_.toList)
+  }
+}
+object MyPostgresProfile extends MyPostgresProfile
+
+trait ExtendedPostgresProfile extends ExPostgresProfile /*PostgresProfile*/
+  with PgCirceJsonSupport
+  with array.PgArrayJdbcTypes {
+
+  override val pgjson = "jsonb"
+
+  override val api: API = new API {}
+
+  val plainAPI = new API with CirceJsonPlainImplicits
+
+  trait API extends super.API with JsonImplicits with CirceImplicits {
+    implicit val strListTypeMapper = new SimpleArrayJdbcType[String]("text").to(_.toList)
+  }
 }
 
 object ExtendedPostgresProfile extends ExtendedPostgresProfile
+
+//trait ExtendedPostgresProfile extends ExPostgresProfile with PgPlayJsonSupport {
+//  def pgjson = "jsonb"
+//
+//  override protected def computeCapabilities: Set[Capability] =
+//    super.computeCapabilities + JdbcCapabilities.insertOrUpdate
+//
+//  override val api = PostgresJsonSupportAPI
+//
+//  object PostgresJsonSupportAPI extends API with JsonImplicits
+//}
+//
+//object ExtendedPostgresProfile extends ExtendedPostgresProfile
 /**
  * {@link https://github.com/tminglei/slick-pg } Custom Slick PostgreSql Driver
  *

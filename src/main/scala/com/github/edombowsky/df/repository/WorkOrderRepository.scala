@@ -5,6 +5,7 @@ import java.sql.Timestamp
 import com.byteslounge.slickrepo.meta.Keyed
 import com.byteslounge.slickrepo.repository.Repository
 import com.byteslounge.slickrepo.scalaversion.JdbcProfile
+import io.circe.Json
 import slick.ast.BaseTypedType
 import slick.collection.heterogeneous.HNil
 
@@ -16,11 +17,11 @@ class WorkOrderRepository(override val driver: JdbcProfile)
 
   import driver.api._
   val pkType = implicitly[BaseTypedType[String]]
-  val tableQuery = TableQuery[WorkOrderTable]
-  type TableType = WorkOrderTable
+  val tableQuery = TableQuery[WorkOrders]
+  type TableType = WorkOrders
 
   //To deal with the schama see::  https://stackoverflow.com/questions/13381153/slick-issue-when-going-with-postgresql
-  class WorkOrderTable(tag: Tag) extends Table[WorkOrder](tag, Some("datafabric_workorder"), "work_orders") with Keyed[String] {
+  class WorkOrders(tag: Tag) extends Table[WorkOrder](tag, Some("datafabric_workorder"), "work_orders") with Keyed[String] {
     def id = column[String]("work_order_uuid", O.PrimaryKey)
     def parentWorkOrder = column[Option[String]]("parent_work_order")
     def description = column[String]("description")
@@ -68,7 +69,7 @@ class WorkOrderRepository(override val driver: JdbcProfile)
       createdBy :: workOrderId :: workOrderTemplate :: userStatus ::
       assetWork :: raisedDateTime :: raisedBy :: plannedStartDateTime ::
       plannedFinishDateTime :: actualStartDateTime :: actualFinishDateTime ::
-      closedDateTime :: plannedDuration :: actualDuration:: completedBy ::
+      closedDateTime :: plannedDuration :: actualDuration :: completedBy ::
       completionComments :: location :: assetPosition :: solutionAttributes ::
       customAttributes :: responsibleOrg :: account :: attachment ::
       productServiceRequirement :: activity :: HNil

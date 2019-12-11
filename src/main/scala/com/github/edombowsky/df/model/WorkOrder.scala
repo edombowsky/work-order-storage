@@ -2,9 +2,10 @@ package com.github.edombowsky.df.model
 
 import java.sql.Timestamp
 
-import com.github.edombowsky.df.utils.Time.toISO8601UTC
 import com.byteslounge.slickrepo.meta.Entity
-import play.api.libs.json.JsValue
+import io.circe.Json
+
+import com.github.edombowsky.df.utils.Time.toISO8601UTC
 
 
 final case class WorkOrder(override val id: Option[String],
@@ -38,7 +39,7 @@ final case class WorkOrder(override val id: Option[String],
   completionComments: Option[String],
   location: Option[String],
   assetPosition: Option[String],
-  solutionAttributes: Option[String],
+  solutionAttributes: String,
   customAttributes: Option[String],
   responsibleOrg: Option[String],
   account: Option[String],
@@ -48,7 +49,7 @@ final case class WorkOrder(override val id: Option[String],
 ) extends Entity[WorkOrder, String] {
 
   def withId(id: String): WorkOrder = this.copy(id = Some(id))
-
+/*
   override def toString: String =
     s"""
       |com.github.edombowsky.model.WorkOrder: id: $id
@@ -73,7 +74,6 @@ final case class WorkOrder(override val id: Option[String],
       |  actualDuration: ${actualDuration.getOrElse("NULL")}
       |  completedBy: ${completedBy.getOrElse("NULL")}
       |  completionComments: ${completionComments.getOrElse("NULL")}
-      |  solutionAttributes: ${solutionAttributes.getOrElse("NULL")}}
       |  customAttributes: ${customAttributes.getOrElse("NULL")}
       |  assignedTo: ${assignedTo.getOrElse("NULL")}
       |  asset: ${asset.getOrElse("NULL")}
@@ -85,4 +85,7 @@ final case class WorkOrder(override val id: Option[String],
       |  productServiceRequirement: ${productServiceRequirement.getOrElse("NULL")}
       |  activity: ${activity.getOrElse("NULL")}
     """.stripMargin
+  //solutionAttributes: ${solutionAttributes.getOrElse("NULL")}}
+
+ */
 }
