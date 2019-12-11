@@ -5,7 +5,8 @@ object GenerateWorkOrder {
 
     slick.codegen.SourceCodeGenerator.main(
       Array(
-        "slick.jdbc.PostgresProfile",
+        //"slick.jdbc.PostgresProfile",
+        "MyPostgresDriver",
         "org.postgresql.Driver",
         "jdbc:postgresql://localhost:5432/caeadom?stringtype=unspecified&currentSchema=datafabric_workorder",
         "src/main/scala",
