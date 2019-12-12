@@ -4,6 +4,7 @@ import java.sql.Timestamp
 
 import com.byteslounge.slickrepo.meta.Entity
 import io.circe.Json
+import io.circe.Printer
 
 import com.github.edombowsky.df.utils.Time.toISO8601UTC
 
@@ -75,17 +76,17 @@ final case class WorkOrder(override val id: Option[String],
       |  actualDuration: ${actualDuration.getOrElse("NULL")}
       |  completedBy: ${completedBy.getOrElse("NULL")}
       |  completionComments: ${completionComments.getOrElse("NULL")}
-      |  solutionAttributes: ${solutionAttributes}
-      |  customAttributes: ${customAttributes.getOrElse("NULL")}
+      |  solutionAttributes: ${solutionAttributes.map(Printer.noSpaces.print).getOrElse("NULL")}
+      |  customAttributes: ${customAttributes.map(Printer.noSpaces.print).getOrElse("NULL")}
       |  assignedTo: ${assignedTo.getOrElse("NULL")}
       |  asset: ${asset.getOrElse("NULL")}
       |  assetPosition: ${assetPosition.getOrElse("NULL")}
       |  location: ${location.getOrElse("NULL")}
       |  responsibleOrg: ${responsibleOrg.getOrElse("NULL")}
       |  account: ${account.getOrElse("NULL")}
-      |  attachment: ${attachment.getOrElse("NULL")}
-      |  productServiceRequirement: ${productServiceRequirement.getOrElse("NULL")}
-      |  activity: ${activity.getOrElse("NULL")}
+      |  attachment: ${attachment.map(Printer.noSpaces.print).getOrElse("NULL")}
+      |  productServiceRequirement: ${productServiceRequirement.map(Printer.noSpaces.print).getOrElse("NULL")}
+      |  activity: ${activity.map(Printer.noSpaces.print).getOrElse("NULL")}
       |  nodeClass: $nodeClass
     """.stripMargin
 }
