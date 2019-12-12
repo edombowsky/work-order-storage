@@ -2,23 +2,23 @@ package com.github.edombowsky.df.utils
 
 import com.github.tminglei.slickpg._
 import com.github.tminglei.slickpg.PgCirceJsonSupport
-import slick.jdbc.PostgresProfile
 
-trait MyPostgresProfile extends PostgresProfile
-  with PgCirceJsonSupport
-  with array.PgArrayJdbcTypes {
-  override val pgjson = "jsonb"
 
-  override val api: API = new API {}
-
-  val plainAPI = new API with CirceJsonPlainImplicits
-
-  ///
-  trait API extends super.API with JsonImplicits {
-    implicit val strListTypeMapper = new SimpleArrayJdbcType[String]("text").to(_.toList)
-  }
-}
-object MyPostgresProfile extends MyPostgresProfile
+//trait MyPostgresProfile extends PostgresProfile
+//  with PgCirceJsonSupport
+//  with array.PgArrayJdbcTypes {
+//  override val pgjson = "jsonb"
+//
+//  override val api: API = new API {}
+//
+//  val plainAPI = new API with CirceJsonPlainImplicits
+//
+//  ///
+//  trait API extends super.API with JsonImplicits {
+//    implicit val strListTypeMapper = new SimpleArrayJdbcType[String]("text").to(_.toList)
+//  }
+//}
+//object MyPostgresProfile extends MyPostgresProfile
 
 trait ExtendedPostgresProfile extends ExPostgresProfile /*PostgresProfile*/
   with PgCirceJsonSupport
@@ -30,7 +30,7 @@ trait ExtendedPostgresProfile extends ExPostgresProfile /*PostgresProfile*/
 
   val plainAPI = new API with CirceJsonPlainImplicits
 
-  trait API extends super.API with JsonImplicits with CirceImplicits {
+  trait API extends super.API with JsonImplicits {
     implicit val strListTypeMapper = new SimpleArrayJdbcType[String]("text").to(_.toList)
   }
 }

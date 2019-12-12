@@ -3,12 +3,10 @@ package com.github.edombowsky.df.config
 import org.flywaydb.core.Flyway
 import org.flywaydb.core.api.configuration.Configuration
 
-import com.github.edombowsky.df.utils.DB
-
-trait MigrationConfig extends DB {
+trait MigrationConfig  {
 
   private val flyway: Flyway = Flyway.configure
-    .dataSource(databaseUrl, databaseUser, databasePassword)
+    .dataSource(AppSettings.databaseUrl, AppSettings.databaseUser, AppSettings.databasePassword)
     .baselineOnMigrate(true)
     .load
 

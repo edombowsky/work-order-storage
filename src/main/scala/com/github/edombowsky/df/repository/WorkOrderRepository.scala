@@ -10,10 +10,12 @@ import slick.ast.BaseTypedType
 import slick.collection.heterogeneous.HNil
 
 import com.github.edombowsky.df.model.WorkOrder
-import com.github.edombowsky.df.utils.DB
+
+import com.github.edombowsky.df.utils.ExtendedPostgresProfile.api._
+
 
 class WorkOrderRepository(override val driver: JdbcProfile)
-  extends Repository[WorkOrder, String](driver) {
+  extends Repository[WorkOrder, String](driver)  {
 
   import driver.api._
   val pkType = implicitly[BaseTypedType[String]]
@@ -53,13 +55,14 @@ class WorkOrderRepository(override val driver: JdbcProfile)
     def completionComments = column[Option[String]]("completion_comments")
     def location = column[Option[String]]("location")
     def assetPosition = column[Option[String]]("asset_position")
-    def solutionAttributes = column[String]("solution_attributes")
-    def customAttributes = column[Option[String]]("custom_attributes")
+    def solutionAttributes = column[Option[Json]]("solution_attributes")
+    def customAttributes = column[Option[Json]]("custom_attributes")
     def responsibleOrg = column[Option[String]]("responsible_org")
     def account = column[Option[String]]("account")
-    def attachment = column[Option[String]]("attachment")
-    def productServiceRequirement = column[Option[String]]("product_service_requirement")
-    def activity = column[Option[String]]("activity")
+    def attachment = column[Option[Json]]("attachment")
+    def productServiceRequirement = column[Option[Json]]("product_service_requirement")
+    def activity = column[Option[Json]]("activity")
+    def nodeClass = column[Int]("node_class")
 
     def m3 = (
       id.? ::
@@ -72,7 +75,7 @@ class WorkOrderRepository(override val driver: JdbcProfile)
       closedDateTime :: plannedDuration :: actualDuration :: completedBy ::
       completionComments :: location :: assetPosition :: solutionAttributes ::
       customAttributes :: responsibleOrg :: account :: attachment ::
-      productServiceRequirement :: activity :: HNil
+      productServiceRequirement :: activity :: nodeClass :: HNil
       ).mapTo[WorkOrder]
 
     def * = m3

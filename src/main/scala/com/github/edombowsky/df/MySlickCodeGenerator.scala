@@ -6,7 +6,8 @@ import scala.concurrent.duration.Duration
 import slick.codegen.SourceCodeGenerator
 import slick.jdbc.JdbcProfile
 
-import com.github.edombowsky.df.utils.MyPostgresProfile
+import com.github.edombowsky.df.utils.ExtendedPostgresProfile
+
 
 object MySlickCodeGenerator {
 
@@ -28,7 +29,7 @@ object MySlickCodeGenerator {
   }
 
   def main(args: Array[String]) {
-    genCustomTables(MyPostgresProfile)
+    genCustomTables(ExtendedPostgresProfile)
 
     println(s"Tables.scala generated in $outputFolder")
   }

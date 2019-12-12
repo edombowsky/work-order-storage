@@ -39,17 +39,18 @@ final case class WorkOrder(override val id: Option[String],
   completionComments: Option[String],
   location: Option[String],
   assetPosition: Option[String],
-  solutionAttributes: String,
-  customAttributes: Option[String],
+  solutionAttributes: Option[Json],
+  customAttributes: Option[Json],
   responsibleOrg: Option[String],
   account: Option[String],
-  attachment: Option[String],
-  productServiceRequirement: Option[String],
-  activity: Option[String]
+  attachment: Option[Json],
+  productServiceRequirement: Option[Json],
+  activity: Option[Json],
+  nodeClass: Int
 ) extends Entity[WorkOrder, String] {
 
   def withId(id: String): WorkOrder = this.copy(id = Some(id))
-/*
+
   override def toString: String =
     s"""
       |com.github.edombowsky.model.WorkOrder: id: $id
@@ -74,6 +75,7 @@ final case class WorkOrder(override val id: Option[String],
       |  actualDuration: ${actualDuration.getOrElse("NULL")}
       |  completedBy: ${completedBy.getOrElse("NULL")}
       |  completionComments: ${completionComments.getOrElse("NULL")}
+      |  solutionAttributes: ${solutionAttributes}
       |  customAttributes: ${customAttributes.getOrElse("NULL")}
       |  assignedTo: ${assignedTo.getOrElse("NULL")}
       |  asset: ${asset.getOrElse("NULL")}
@@ -84,8 +86,6 @@ final case class WorkOrder(override val id: Option[String],
       |  attachment: ${attachment.getOrElse("NULL")}
       |  productServiceRequirement: ${productServiceRequirement.getOrElse("NULL")}
       |  activity: ${activity.getOrElse("NULL")}
+      |  nodeClass: $nodeClass
     """.stripMargin
-  //solutionAttributes: ${solutionAttributes.getOrElse("NULL")}}
-
- */
 }

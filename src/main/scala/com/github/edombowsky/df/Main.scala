@@ -1,28 +1,20 @@
 package com.github.edombowsky.df
 
-
-import com.github.edombowsky.df.utils.DatabaseExecutor._
-
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
 import scala.util.Failure
 import scala.util.Success
 
-import io.jvm.uuid._
 import io.circe._
 import io.circe.parser._
+import io.jvm.uuid._
 
-import com.github.edombowsky.df.config.AppSettings
 import com.github.edombowsky.df.model.WorkOrder
 import com.github.edombowsky.df.repository.WorkOrderRepository
-//import com.github.edombowsky.df.repository.WorkOrderRepository
+import com.github.edombowsky.df.utils.DatabaseExecutor._
 import com.github.edombowsky.df.utils.ExtendedPostgresProfile
 
-//object Main extends MigrationConfig {
+
 object Main {
-  //private val Test = "test"
-  //private val Dev = "dev"
-  //private val Prod = "prod"
 
   //migrate()
 
@@ -63,34 +55,23 @@ object Main {
       completionComments = None,
       location = None,
       assetPosition = None,
-      solutionAttributes = "{}", //parse(""" { "a":101, "b":"aaa", "c":[3,4,5,9] } """).getOrElse(Json.Null),
+      solutionAttributes = Some(parse(""" { "a":101, "b":"aaa", "c":[3,4,5,9] } """).getOrElse(Json.Null)),
       customAttributes = None,
       responsibleOrg = None,
       account = None,
       attachment = None,
       productServiceRequirement = None,
-      activity = None
+      activity = None,
+      nodeClass = 0
     )
     println(s"WorkOrder to be saved:: $wo")
 
     val workOrderRepository = new WorkOrderRepository(ExtendedPostgresProfile)
     val workOrder = workOrderRepository.save(wo)
 
-/*
-    val workOrder: workOrderRepository.driver.api.DBIO[WorkOrder] = workOrderRepository.save(wo)
-
-    workOrder map { result =>
-      val id = result.id.getOrElse("NULL")
-      val desc = result.description
-      println(s"Inserted $id::$desc")
-    }
-*/
-
-    //val w: Future[WorkOrder] = workOrderRepository.db.run(workOrderRepository.save())
     workOrder.onComplete {
       case Success(value) =>
-        println("Id of WorkOrder Added : " + value.id.getOrElse("0000"))
-        println("SUCCESS")
+        println("Got called back and Id of WorkOrder Added : " + value.id.getOrElse("0000"))
       case Failure(exception) =>
         exception.printStackTrace()
         //println(s"Encountered an exception::\n${exception.printStackTrace()}")
@@ -100,7 +81,7 @@ object Main {
 
     workOrderRepository.count().onComplete {
       case Success(value) =>
-        println(s"Number of work_orders = $value")
+        println(s"Got called back and total Number of work_orders is $value")
       case Failure(exception) =>
         exception.printStackTrace()
     }
