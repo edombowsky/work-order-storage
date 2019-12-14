@@ -10,7 +10,6 @@ import slick.ast.BaseTypedType
 import slick.collection.heterogeneous.HNil
 
 import com.github.edombowsky.df.model.WorkOrder
-
 import com.github.edombowsky.df.utils.ExtendedPostgresProfile.api._
 
 

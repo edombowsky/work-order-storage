@@ -19,3 +19,17 @@ docker run --rm --name pg -e POSTGRES_PASSWORD=docker -e POSTGRES_USER=postgres 
 ```bash
 sbt flywayMigrate
 ```
+
+## References
+
+- [CRUD Repositories for Slick based persistence Scala projects](https://github.com/gonmarques/slick-repo)
+- [Slick Extensions for PostgreSQL](https://github.com/tminglei/slick-pg)
+- [Handling Postgres json datatype in slick, scala](https://stackoverflow.com/a/56917169/6015856)
+- [Flyway](https://flywaydb.org/)
+- [Flyway Migration Javadoc](https://flywaydb.org/documentation/api/javadoc/org/flywaydb/core/Flyway)
+- [Simple Slick example](https://github.com/adekunleba/sample-slick)
+- [Postgres.app](https://postgresapp.com/)
+- [Creating user, database and adding access on PostgreSQL](https://medium.com/coding-blocks/creating-user-database-and-adding-access-on-postgresql-8bfcd2f4a91e)
+- [How to Change a User to Superuser in PostgreSQL](https://chartio.com/resources/tutorials/how-to-change-a-user-to-superuser-in-postgresql/)
+- [PostGis for Postgres on MacOS](https://stackoverflow.com/a/20974997/6015856)
+- [Some time utilities](https://github.com/skygoo/breaker/blob/47075860731cbee28a0953cab4a8eb44b5b681a6/backend/src/main/scala/com/neo/sk/utils/TimeUtil.scala)
