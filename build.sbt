@@ -1,4 +1,4 @@
-//enablePlugins(FlywayPlugin)
+enablePlugins(FlywayPlugin)
 
 //common settings for the project and sub-projects
 lazy val commonSettings = Seq(
@@ -81,18 +81,17 @@ lazy val root = (project in file("."))
     libraryDependencies += "org.flywaydb" % "flyway-core" % "6.1.1",
     libraryDependencies += "com.github.nscala-time" %% "nscala-time" % "2.22.0",
   )
-  //.enablePlugin(FlywayPlugin)
 
-//flywayUser := "caeadom"
-//flywayPassword := ""
 // Use stringtype=unspecified to indicate strings should be inferred.
 // Remove problem with storing JSON string into JSONB column
-//flywayUrl := "jdbc:postgresql://localhost:5432/caeadom?stringtype=unspecified"
-//flywayLocations := Seq(
-//  "filesystem:./db/migration" // for SQL-based migration
-//)
-//flywaySchemas := Seq("datafabric_workorder")
-//flywayTable := "schema_history"
+flywayUrl := "jdbc:postgresql://" +
+             sys.env.get("POSTGRES_SERVER").getOrElse("localhost") + ":" +
+             sys.env.get("POSTGRES_PORT").getOrElse("5432") + "/" +
+             sys.env.get("POSTGRES_DATABASE_NAME").getOrElse("caeadom") +
+             "?stringtype=unspecified&currentSchema=datafabric_workorder"
+flywayUser := sys.env.get("POSTGRES_USER").getOrElse("caeadom")
+flywayPassword := sys.env.get("POSTGRES_PASSWORD").getOrElse("")
+flywaySchemas := Seq("datafabric_workorder")
 //flywayUrl in Test := "jdbc:hsqldb:file:target/flyway_sample;shutdown=true"
 //flywayUser in Test := "postgres"
 //flywayPassword in Test := "docker"
