@@ -22,6 +22,7 @@ sbt flywayMigrate
 
 ## References
 
+- [HikariCP](https://github.com/brettwooldridge/HikariCP)
 - [CRUD Repositories for Slick based persistence Scala projects](https://github.com/gonmarques/slick-repo)
 - [Slick Extensions for PostgreSQL](https://github.com/tminglei/slick-pg)
 - [Handling Postgres json datatype in slick, scala](https://stackoverflow.com/a/56917169/6015856)
