@@ -1,5 +1,3 @@
-enablePlugins(FlywayPlugin)
-
 //common settings for the project and sub-projects
 lazy val commonSettings = Seq(
 
@@ -60,6 +58,7 @@ lazy val sbtScoverageSetings = Seq(
 )
 
 lazy val root = (project in file("."))
+  .enablePlugins(FlywayPlugin)
   .settings(commonSettings: _*)
   .settings(sbtScoverageSetings: _*)
   .settings(
@@ -78,15 +77,15 @@ lazy val root = (project in file("."))
     libraryDependencies += "org.scalactic" %% "scalactic" % "3.1.0",
     libraryDependencies += "org.scalatest" %% "scalatest" % "3.1.0" % Test,
     libraryDependencies += "io.jvm.uuid" %% "scala-uuid" % "0.3.1",
-    libraryDependencies += "org.flywaydb" % "flyway-core" % "6.1.1",
     libraryDependencies += "com.github.nscala-time" %% "nscala-time" % "2.22.0",
+    libraryDependencies += "org.apache.kafka" % "kafka-clients" % "2.4.0"
   )
 
 // Use stringtype=unspecified to indicate strings should be inferred.
 // Remove problem with storing JSON string into JSONB column
 flywayUrl := "jdbc:postgresql://" +
              sys.env.get("POSTGRES_SERVER").getOrElse("localhost") + ":" +
-             sys.env.get("POSTGRES_PORT").getOrElse("5432") + "/" +
+             sys.env.get("POSTGRES_PORT").getOrElse("25432") + "/" +
              sys.env.get("POSTGRES_DATABASE_NAME").getOrElse("caeadom") +
              "?stringtype=unspecified&currentSchema=datafabric_workorder"
 flywayUser := sys.env.get("POSTGRES_USER").getOrElse("caeadom")

@@ -8,7 +8,7 @@ object GenerateWorkOrder {
         //"slick.jdbc.PostgresProfile",
         "MyPostgresDriver",
         "org.postgresql.Driver",
-        "jdbc:postgresql://localhost:5432/caeadom?stringtype=unspecified&currentSchema=datafabric_workorder",
+        "jdbc:postgresql://localhost:25432/caeadom?stringtype=unspecified&currentSchema=datafabric_workorder",
         "src/main/scala",
         "com.github.edombowsky.models",
         "caeadom",

@@ -61,7 +61,6 @@ class WorkOrderRepository(override val driver: JdbcProfile)
     def attachment = column[Option[Json]]("attachment")
     def productServiceRequirement = column[Option[Json]]("product_service_requirement")
     def activity = column[Option[Json]]("activity")
-    def nodeClass = column[Int]("node_class")
 
     def m3 = (
       id.? ::
@@ -74,7 +73,7 @@ class WorkOrderRepository(override val driver: JdbcProfile)
       closedDateTime :: plannedDuration :: actualDuration :: completedBy ::
       completionComments :: location :: assetPosition :: solutionAttributes ::
       customAttributes :: responsibleOrg :: account :: attachment ::
-      productServiceRequirement :: activity :: nodeClass :: HNil
+      productServiceRequirement :: activity :: HNil
       ).mapTo[WorkOrder]
 
     def * = m3

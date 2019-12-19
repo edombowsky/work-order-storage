@@ -46,8 +46,7 @@ final case class WorkOrder(override val id: Option[String],
   account: Option[String],
   attachment: Option[Json],
   productServiceRequirement: Option[Json],
-  activity: Option[Json],
-  nodeClass: Int
+  activity: Option[Json]
 ) extends Entity[WorkOrder, String] {
 
   def withId(id: String): WorkOrder = this.copy(id = Some(id))
@@ -87,6 +86,5 @@ final case class WorkOrder(override val id: Option[String],
       |  attachment: ${attachment.map(Printer.noSpaces.print).getOrElse("NULL")}
       |  productServiceRequirement: ${productServiceRequirement.map(Printer.noSpaces.print).getOrElse("NULL")}
       |  activity: ${activity.map(Printer.noSpaces.print).getOrElse("NULL")}
-      |  nodeClass: $nodeClass
     """.stripMargin
 }
