@@ -15,7 +15,7 @@ object MySlickCodeGenerator {
 
   val slickDriver = "slick.jdbc.PostgresProfile"
   val jdbcDriver = "org.postgresql.Driver"
-  val url = "jdbc:postgresql://localhost:5432/caeadom?useUnicode=true&characterEncoding=utf-8&stringtype=unspecified&currentSchema=datafabric_workorde"
+  val url = "jdbc:postgresql://localhost:25432/caeadom?useUnicode=true&characterEncoding=utf-8&stringtype=unspecified&currentSchema=datafabric_workorde"
   val outputFolder = "target/gencode/genTablesPsql"
   val pkg = "com.github.edombowsky.models"
   val user = "caeadom"

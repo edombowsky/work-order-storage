@@ -61,8 +61,7 @@ object Main {
       account = None,
       attachment = None,
       productServiceRequirement = None,
-      activity = None,
-      nodeClass = 0
+      activity = None
     )
     println(s"WorkOrder to be saved:: $wo")
 
