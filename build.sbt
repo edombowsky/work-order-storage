@@ -6,6 +6,9 @@ lazy val commonSettings = Seq(
   version := "0.0.1",
   scalaVersion := "2.13.0",
 
+  startYear := Some(2019),
+  licenses += ("Apache-2.0", new URL("https://www.apache.org/licenses/LICENSE-2.0.txt")),
+
   scalacOptions ++= Seq(
     "-target:jvm-1.8",
 

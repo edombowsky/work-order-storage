@@ -3,3 +3,4 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.4.1")
 addSbtPlugin("org.scoverage" % "sbt-scoverage" % "1.6.0")
 
 addSbtPlugin("io.github.davidmweber" % "flyway-sbt" % "6.0.7")
+addSbtPlugin("de.heikoseeberger" % "sbt-header" % "5.3.1")
